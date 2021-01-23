@@ -3,6 +3,8 @@ package com.lynx.book.guestbook.controller;
 import com.lynx.book.guestbook.model.Comments;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -33,5 +35,15 @@ public class GuestBookAPIController {
     public List<Comments> getAllComments(){
         setup();
         return commentList;
+    }
+
+    @PostMapping("/guest/book/addComment")
+    public String addComment(@RequestBody Comments comments){
+        commentList = new ArrayList<Comments>();
+        commentList.add(comments);
+        if(commentList.size()>0)
+            return "Comment Added.";
+        return "Comment failed.";
+
     }
 }
