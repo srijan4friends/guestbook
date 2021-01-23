@@ -30,8 +30,11 @@ public class GuestBookApiTest {
     public void getAllComments() throws Exception {
         mvc.perform(get("/guest/book/allComments"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Jose"))
-                .andExpect(jsonPath("$.comment").value("Nice Place"))
-        ;
+                .andExpect(jsonPath("$[0].name").value("Srijan"))
+                .andExpect(jsonPath("$[0].comment").value("Good Place"))
+                .andExpect(jsonPath("$[1].name").value("Jose"))
+                .andExpect(jsonPath("$[1].comment").value("Nice Place"));
     }
+
+
 }
